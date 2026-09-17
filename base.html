@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            Admin Panel
+        {% endblock %}
+    </title>
+    <link rel="shortcut icon" href="{% static 'images/logo/favicon.png' %}" type="image/png"/>
+    <link href="{% static 'fonts/noto-sans-v42-latin-regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{% static 'remixicon/remixicon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("admin-theme");
+            const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const theme = savedTheme || (prefersDark ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <style>
+        body { font-family: 'Noto sans', sans-serif; }
+        @font-face {
+            font-family: "remixicon";
+            src: url("{% static 'remixicon/remixicon.woff2' %}") format("woff2");
+            font-display: swap;
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 300;
+            src: url("{% static 'fonts/noto-sans-v42-latin-300.woff2' %}") format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: url("{% static 'fonts/noto-sans-v42-latin-regular.woff2' %}") format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: italic;
+            font-weight: 400;
+            src: url("{% static 'fonts/noto-sans-v42-latin-italic.woff2' %}") format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 500;
+            src: url("{% static 'fonts/noto-sans-v42-latin-500.woff2' %}") format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 600;
+            src: url("{% static 'fonts/noto-sans-v42-latin-600.woff2' %}") format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 700;
+            src: url("{% static 'fonts/noto-sans-v42-latin-700.woff2' %}") format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 800;
+            src: url("{% static 'fonts/noto-sans-v42-latin-800.woff2' %}") format('woff2'); 
+        }
+    </style>
+</head>
+<body class="sidebar-collapsed">
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <div class="sidebar-header">
+            <a href="{% url 'dashboard' %}" class="logo">
+                <div class="brand-icon">
+                    <img src="{% static 'images/logo/logo.png' %}" alt="navbar brand" class="navbar-brand" height="40">
+                </div>
+                <span class="brand-text">App Launcher</span>
+            </a>
+                <button type="button" class="icon-btn mobile-sidebar-close" id="mobileSidebarClose" aria-label="Close navigation">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 17.9996V19.9996H3V17.9996H21ZM7 3.5V13.5L2 8.49955L7 3.5ZM21 10.9996V12.9996H12V10.9996H21ZM21 3.99955V5.99955H12V3.99955H21Z"></path></svg>
+                </button>
+        </div>
+
+        <nav>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">
+                    Navigation
+                </div>
+                <a href="{% url 'dashboard' %}" class="sidebar-link active" data-page="Dashboard">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 21C13.4477 21 13 20.5523 13 20V12C13 11.4477 13.4477 11 14 11H20C20.5523 11 21 11.4477 21 12V20C21 20.5523 20.5523 21 20 21H14ZM4 13C3.44772 13 3 12.5523 3 12V4C3 3.44772 3.44772 3 4 3H10C10.5523 3 11 3.44772 11 4V12C11 12.5523 10.5523 13 10 13H4ZM9 11V5H5V11H9ZM4 21C3.44772 21 3 20.5523 3 20V16C3 15.4477 3.44772 15 4 15H10C10.5523 15 11 15.4477 11 16V20C11 20.5523 10.5523 21 10 21H4ZM5 19H9V17H5V19ZM15 19H19V13H15V19ZM13 4C13 3.44772 13.4477 3 14 3H20C20.5523 3 21 3.44772 21 4V8C21 8.55228 20.5523 9 20 9H14C13.4477 9 13 8.55228 13 8V4ZM15 5V7H19V5H15Z"></path></svg>
+                    <span class="sidebar-label">Dashboard</span>
+                </a>
+                <a href="{% url 'apps' %}" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.75 2.5C9.09721 2.5 11 4.40279 11 6.75V11H6.75C4.40279 11 2.5 9.09721 2.5 6.75C2.5 4.40279 4.40279 2.5 6.75 2.5ZM9 9V6.75C9 5.50736 7.99264 4.5 6.75 4.5C5.50736 4.5 4.5 5.50736 4.5 6.75C4.5 7.99264 5.50736 9 6.75 9H9ZM6.75 13H11V17.25C11 19.5972 9.09721 21.5 6.75 21.5C4.40279 21.5 2.5 19.5972 2.5 17.25C2.5 14.9028 4.40279 13 6.75 13ZM6.75 15C5.50736 15 4.5 16.0074 4.5 17.25C4.5 18.4926 5.50736 19.5 6.75 19.5C7.99264 19.5 9 18.4926 9 17.25V15H6.75ZM17.25 2.5C19.5972 2.5 21.5 4.40279 21.5 6.75C21.5 9.09721 19.5972 11 17.25 11H13V6.75C13 4.40279 14.9028 2.5 17.25 2.5ZM17.25 9C18.4926 9 19.5 7.99264 19.5 6.75C19.5 5.50736 18.4926 4.5 17.25 4.5C16.0074 4.5 15 5.50736 15 6.75V9H17.25ZM13 13H17.25C19.5972 13 21.5 14.9028 21.5 17.25C21.5 19.5972 19.5972 21.5 17.25 21.5C14.9028 21.5 13 19.5972 13 17.25V13ZM15 15V17.25C15 18.4926 16.0074 19.5 17.25 19.5C18.4926 19.5 19.5 18.4926 19.5 17.25C19.5 16.0074 18.4926 15 17.25 15H15Z"></path></svg> 
+                    <span class="sidebar-label">Applications</span>
+                </a>
+                <a href="{% url 'ulbs' %}" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 21H3C2.44772 21 2 20.5523 2 20V12.4868C2 12.1978 2.12501 11.9229 2.34282 11.733L6 8.54435V4C6 3.44772 6.44772 3 7 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21ZM9 19H12V12.9416L8 9.45402L4 12.9416V19H7V15H9V19ZM14 19H20V5H8V7.12729C8.23444 7.12729 8.46888 7.20938 8.65718 7.37355L13.6572 11.733C13.875 11.9229 14 12.1978 14 12.4868V19ZM16 11H18V13H16V11ZM16 15H18V17H16V15ZM16 7H18V9H16V7ZM12 7H14V9H12V7Z"></path></svg>
+                    <span class="sidebar-label">ULBs</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+        <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+        <!-- MAIN WRAPPER -->
+        <div class="main-wrapper">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-inner">
+                    <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Toggle navigation sidebar" aria-expanded="true" data-bs-toggle-tooltip="tooltip" title="Navigation">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 18V20H6V18H18ZM21 11V13H3V11H21ZM18 4V6H6V4H18Z"></path></svg>
+                    </button>
+
+                <div class="header-actions">
+                        <!-- Theme Mode -->
+                        <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle light and dark mode" data-bs-toggle-tooltip="tooltip" data-bs-placement="bottom" title="Theme">
+                        <i class="ri-moon-clear-line" id="themeIcon"></i>
+                        </button>
+                        <!-- User -->
+                        <div class="dropdown" data-bs-toggle-tooltip="tooltip" data-bs-placement="right" title="User">
+
+                            <button type="button" class="user-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="avatar">AN</span>
+
+                                <span class="userBlock">
+                                    <span class="user-name d-block">
+                                        Admin Name
+                                    </span>
+
+                                    <span class="user-role d-block">
+                                        Administrator
+                                    </span>
+                                </span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li class="ps-1 uName">
+                                    <span class="dropdown-item">
+                                        <span class="user-name d-block">
+                                            Admin Name
+                                        </span>
+        
+                                        <span class="user-role d-block">
+                                            Administrator
+                                        </span>
+                                    </span>
+                                </li>
+                                <li class="uNameDivider">
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <svg class="me-1 mb-1" viewBox="0 0 24 24" fill="currentColor"><path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path></svg>
+                                        Profile
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <svg class="me-1 mb-1" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8H20C20.5523 8 21 8.44772 21 9V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V9C3 8.44772 3.44772 8 4 8H6V7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7V8ZM5 10V20H19V10H5ZM11 14H13V16H11V14ZM7 14H9V16H7V14ZM15 14H17V16H15V14ZM16 8V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V8H16Z"></path></svg>
+                                        Change Password
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item text-danger" href="#">
+                                        <svg class="me-1 mb-1" viewBox="0 0 24 24" fill="currentColor"><path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path></svg>
+                                        Logout
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- Theme Mode -->
+                        <button type="button" class="icon-btn" id="logout" aria-label="Logout" data-bs-toggle-tooltip="tooltip" data-bs-placement="bottom" title="Logout">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            {% block content %}
+            {% endblock %}
+            
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-0" style="margin-top: 20px; margin-right: 10px; z-index: 1090;">
+    </div>
+
+    <script src="{% static 'js/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/datatables/datatables.min.js' %}"></script>
+    <script src="{% static 'js/sweetalert/sweetalert.min.js' %}"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>

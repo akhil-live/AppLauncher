@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+    <main class="content">
+        <!-- Breadcrumb -->
+        <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+                <div class="page-heading">
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+        </section>
+
+        <!-- Application Cards -->
+        <section class="mb-4" aria-labelledby="quickAccess">
+            <div class="row g-3">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="main-card h-100">
+                        <div class="app-card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 id="quickAccess" class="mb-0 fw-semibold">
+                                    Quick Access
+                                </h5>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
+                                    <a href="{% url 'apps' %}" class="application-card text-decoration-none">
+                                        <div class="application-logo app-icon-blue">
+                                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.75 2.5C9.09721 2.5 11 4.40279 11 6.75V11H6.75C4.40279 11 2.5 9.09721 2.5 6.75C2.5 4.40279 4.40279 2.5 6.75 2.5ZM9 9V6.75C9 5.50736 7.99264 4.5 6.75 4.5C5.50736 4.5 4.5 5.50736 4.5 6.75C4.5 7.99264 5.50736 9 6.75 9H9ZM6.75 13H11V17.25C11 19.5972 9.09721 21.5 6.75 21.5C4.40279 21.5 2.5 19.5972 2.5 17.25C2.5 14.9028 4.40279 13 6.75 13ZM6.75 15C5.50736 15 4.5 16.0074 4.5 17.25C4.5 18.4926 5.50736 19.5 6.75 19.5C7.99264 19.5 9 18.4926 9 17.25V15H6.75ZM17.25 2.5C19.5972 2.5 21.5 4.40279 21.5 6.75C21.5 9.09721 19.5972 11 17.25 11H13V6.75C13 4.40279 14.9028 2.5 17.25 2.5ZM17.25 9C18.4926 9 19.5 7.99264 19.5 6.75C19.5 5.50736 18.4926 4.5 17.25 4.5C16.0074 4.5 15 5.50736 15 6.75V9H17.25ZM13 13H17.25C19.5972 13 21.5 14.9028 21.5 17.25C21.5 19.5972 19.5972 21.5 17.25 21.5C14.9028 21.5 13 19.5972 13 17.25V13ZM15 15V17.25C15 18.4926 16.0074 19.5 17.25 19.5C18.4926 19.5 19.5 18.4926 19.5 17.25C19.5 16.0074 18.4926 15 17.25 15H15Z"></path></svg>                                            
+                                        </div>
+                                        <span class="application-name">Applications</span>
+                                    </a>
+                                </div>
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
+                                    <a href="{% url 'ulbs' %}" class="application-card text-decoration-none">
+                                        <div class="application-logo app-icon-purple">
+                                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 21H3C2.44772 21 2 20.5523 2 20V12.4868C2 12.1978 2.12501 11.9229 2.34282 11.733L6 8.54435V4C6 3.44772 6.44772 3 7 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21ZM9 19H12V12.9416L8 9.45402L4 12.9416V19H7V15H9V19ZM14 19H20V5H8V7.12729C8.23444 7.12729 8.46888 7.20938 8.65718 7.37355L13.6572 11.733C13.875 11.9229 14 12.1978 14 12.4868V19ZM16 11H18V13H16V11ZM16 15H18V17H16V15ZM16 7H18V9H16V7ZM12 7H14V9H12V7Z"></path></svg>
+                                        </div>
+                                        <span class="application-name">ULBs</span>
+                                    </a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+{% endblock %}        

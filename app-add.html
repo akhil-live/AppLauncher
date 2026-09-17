@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<main class="content">
+    <!-- Breadcrumb -->
+    <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+         <div class="page-heading">
+             <h1 class="page-title">Add Application</h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'dashboard' %}">Dashboard</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'apps' %}">Applications</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                        Add Application
+                     </li>
+                 </ol>
+             </nav>
+         </div>
+    </section>
+
+    <section class="mb-4">
+     <div class="card">
+         <div class="card-body p-4">
+             <div class="section-heading">
+                 <p>
+                    Fields marked with <span class="star-required">*</span> are required.
+                 </p>
+             </div>
+             <form id="AdvancedForm" class="needs-validation">
+                 <div class="row g-4">
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="appCode" class="form-label">Application Code <span class="star-required">*</span></label>
+                         <input type="text" class="form-control" id="appCode" name="appCode" placeholder="Enter application code" required>
+                     </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="appName" class="form-label">Application Name <span class="star-required">*</span></label>
+                         <input type="text" class="form-control" id="appName" name="appName" placeholder="Enter application name" required>
+                     </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="textarea-counter-wrapper">
+                            <label for="address" class="form-label">
+                                Application Description <span class="star-required">*</span>
+                            </label>
+                            <textarea class="form-control" id="address" maxlength="500" placeholder="Type description here..."></textarea>
+                            <div class="form-text text-end">
+                                <span class="textarea-count">0</span>/<span class="textarea-max">500</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label class="form-label">
+                            Upload Application Icon <span class="star-required">*</span>
+                        </label>
+                        <div class="file-upload">
+                            <input type="file" id="fileInput" name="attachments" class="visually-hidden" accept=".jpg,.jpeg,.png,.pdf,.doc">
+                            <label for="fileInput" class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="Upload file">
+                                <div class="upload-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 14.5C1 12.1716 2.22429 10.1291 4.06426 8.9812C4.56469 5.044 7.92686 2 12 2C16.0731 2 19.4353 5.044 19.9357 8.9812C21.7757 10.1291 23 12.1716 23 14.5C23 17.9216 20.3562 20.7257 17 20.9811L7 21C3.64378 20.7257 1 17.9216 1 14.5ZM16.8483 18.9868C19.1817 18.8093 21 16.8561 21 14.5C21 12.927 20.1884 11.4962 18.8771 10.6781L18.0714 10.1754L17.9517 9.23338C17.5735 6.25803 15.0288 4 12 4C8.97116 4 6.42647 6.25803 6.0483 9.23338L5.92856 10.1754L5.12288 10.6781C3.81156 11.4962 3 12.927 3 14.5C3 16.8561 4.81833 18.8093 7.1517 18.9868L7.325 19H16.675L16.8483 18.9868ZM13 13V17H11V13H8L12 8L16 13H13Z"></path></svg>
+                                </div>
+                                <div class="drop-zone-title">
+                                    Drag & drop file here
+                                </div>
+                                <div class="drop-zone-text">
+                                    or click to browse files
+                                    <br>
+                                    PNG, JPG, JPEG up to 1 MB
+                                </div>
+                            </label>
+                            <div class="preview"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="baseUrl" class="form-label">Base URL <span class="star-required">*</span></label>
+                         <input type="text" class="form-control" id="baseUrl" name="baseUrl" placeholder="Enter base url" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="launchUrl" class="form-label">Launch URL <span class="star-required">*</span></label>
+                         <input type="text" class="form-control" id="launchUrl" name="launchUrl" placeholder="Enter launch url" required>
+                    </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label class="form-label">
+                            Status <span class="star-required">*</span>
+                        </label><br>
+                        <div class="selectgroup selectgroup-primary selectgroup-pills">
+                            <label class="selectgroup-item mb-2">
+                              <input type="radio" name="status" value="active" class="selectgroup-input" id="status1" required="" checked>
+                              <span class="selectgroup-button ">Active</span>
+                            </label>
+                            <label class="selectgroup-item mb-2">
+                              <input type="radio" name="status" value="inactive" class="selectgroup-input" id="status2" required="">
+                              <span class="selectgroup-button">Inactive</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="version" class="form-label">Version <span class="star-required">*</span></label>
+                        <input type="number" class="form-control" id="version" name="version" placeholder="Enter version" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="displayOrder" class="form-label">Display Order <span class="star-required">*</span></label>
+                        <input type="number" class="form-control" id="displayOrder" name="displayOrder" placeholder="Enter display order" required>
+                    </div>
+                    <div class="d-print-none">
+                        <p class="text-center pt-2">
+                          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                          <a href="{% url 'apps' %}"><button type="button" class="btn btn-secondary btn-sm" name="button">Back</button></a>
+                        </p>
+                    </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+
+ </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.querySelectorAll('.searchable-select').forEach(select => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'dropdown';
+
+        select.parentNode.insertBefore(wrapper, select);
+        wrapper.appendChild(select);
+
+        select.classList.add('d-none');
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'form-select text-start';
+        button.setAttribute('data-bs-toggle', 'dropdown');
+        button.setAttribute('data-bs-auto-close', 'outside');
+
+        const menu = document.createElement('div');
+        menu.className = 'dropdown-menu w-100 p-2';
+
+        const search = document.createElement('input');
+        search.type = 'search';
+        search.className = 'form-control mb-2';
+        search.placeholder = 'Search...';
+        search.autocomplete = 'off';
+
+        const list = document.createElement('div');
+
+        menu.append(search, list);
+        wrapper.append(button, menu);
+
+
+        // Create dropdown options
+        function showOptions() {
+
+            const searchText = search.value.toLowerCase();
+
+            list.innerHTML = '';
+
+            [...select.options].forEach(option => {
+
+                if (!option.value) return;
+
+                if (!option.text.toLowerCase().includes(searchText))
+                    return;
+
+                const item = document.createElement('button');
+
+                item.type = 'button';
+                item.className = 'dropdown-item d-flex justify-content-between';
+                item.textContent = option.text;
+
+                // Selected option
+                if (option.value === select.value) {
+                    item.classList.add('active');
+                    item.innerHTML += ' ✓';
+                }
+
+                item.onclick = () => {
+
+                    select.value = option.value;
+
+                    [...select.options].forEach(opt => {
+                        opt.removeAttribute('selected');
+                    });
+
+                    option.setAttribute('selected', '');
+
+                    button.textContent = option.text;
+                    button.title = option.text;
+
+                    // Keep normal select/change events working
+                    select.dispatchEvent(new Event('change', {
+                        bubbles: true
+                    }));
+
+                    bootstrap.Dropdown.getOrCreateInstance(button).hide();
+                };
+
+                list.appendChild(item);
+            });
+
+            if (!list.children.length) {
+                list.innerHTML =
+                    '<div class="text-center p-2" style="color: #94a3b8;">No results found</div>';
+            }
+        }
+
+        // Search
+        search.addEventListener('input', showOptions);
+
+
+        // Show options when opened
+        button.addEventListener('shown.bs.dropdown', () => {
+            search.value = '';
+            showOptions();
+            search.focus();
+        });
+
+
+        // Show selected value initially
+        const selected = select.options[select.selectedIndex];
+
+        if (selected && selected.value) {
+            button.textContent = selected.text;
+        } else {
+            button.textContent = select.options[0]?.text || 'Select...';
+        }
+
+    });
+
+</script>
+{% endblock %}
+
