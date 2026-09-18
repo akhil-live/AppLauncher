@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initTooltips();
     initTextareaCounters();
     initSwitchDesciptionView();
+    initMultiDropdown();
 });
 
 /* ================================================================
@@ -474,6 +475,25 @@ document.addEventListener('DOMContentLoaded', function () {
     initTextareaCounters();
 });
 
+/*=======================================================
+    MULTIPLE SELECT DROPDOWN
+========================================================== */
+function initMultiDropdown() {
+    document.querySelectorAll("select[multiple]").forEach(function (element) {
+        const placeholder = element.dataset.placeholder || "Select...";
+        const search = element.dataset.search !== "false";
+        new Choices(element, {
+            removeItemButton: true,
+            searchEnabled: search,
+            placeholder: true,
+            placeholderValue: placeholder,
+            searchPlaceholderValue: "Search...",
+            itemSelectText: "",
+            shouldSort: false,
+            allowHTML: false
+        });
+    });
+}
 
 /*=======================================================
     Open calendar
