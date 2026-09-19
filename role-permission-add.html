@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<main class="content">
+    <!-- Breadcrumb -->
+    <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+         <div class="page-heading">
+             <h1 class="page-title">Add Role Permission</h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'dashboard' %}">Dashboard</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'role-permission' %}">Role Permission</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                        Add Role Permission
+                     </li>
+                 </ol>
+             </nav>
+         </div>
+    </section>
+
+    <section class="mb-4">
+     <div class="card">
+         <div class="card-body p-4">
+             <div class="section-heading">
+                 <p>
+                    Fields marked with <span class="star-required">*</span> are required.
+                 </p>
+             </div>
+             <form id="AdvancedForm" class="needs-validation">
+                 <div class="row g-4">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <label for="role" class="form-label">Role <span class="star-required">*</span></label>
+                        <select class="form-select" id="role" name="role[]" multiple data-placeholder="Select role"
+                        data-search="true" required>
+                            <option value="1">Role 1</option>
+                            <option value="2">Role 2</option>
+                            <option value="3">Role 3</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <label for="permission" class="form-label">Permission <span class="star-required">*</span></label>
+                        <select class="form-select" id="permission" name="permission[]" multiple data-placeholder="Select permission"
+                        data-search="true" required>
+                            <option value="1">Permission 1</option>
+                            <option value="2">Permission 2</option>
+                            <option value="3">Permission 3</option>
+                        </select>
+                    </div>
+                    <div class="d-print-none">
+                        <p class="text-center pt-2">
+                          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                          <a href="{% url 'role-permission' %}"><button type="button" class="btn btn-secondary btn-sm" name="button">Back</button></a>
+                        </p>
+                    </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+
+ </section>
+</main>
+{% endblock %}
+

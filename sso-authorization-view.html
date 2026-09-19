@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<main class="content">
+    <!-- Breadcrumb -->
+    <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+         <div class="page-heading">
+             <h1 class="page-title">SSO Authorization View</h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'dashboard' %}">Dashboard</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'sso-authorization' %}">SSO Authorization</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                        SSO Authorization View
+                     </li>
+                 </ol>
+             </nav>
+         </div>
+    </section>
+
+    <section class="mb-4">
+     <div class="card">
+        <div class="card-header d-print-none">
+            <p class="text-end pt-2">
+                <a href="{% url 'sso-authorization' %}">
+                    <button type="button" class="btn btn-xs btn-primary app-open-btn my-1" data-bs-toggle="tooltip" data-bs-placement="top" title="back">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.82843 6.99955L8.36396 9.53509L6.94975 10.9493L2 5.99955L6.94975 1.0498L8.36396 2.46402L5.82843 4.99955H13C17.4183 4.99955 21 8.58127 21 12.9996C21 17.4178 17.4183 20.9996 13 20.9996H4V18.9996H13C16.3137 18.9996 19 16.3133 19 12.9996C19 9.68584 16.3137 6.99955 13 6.99955H5.82843Z"></path></svg>
+                    </button>
+                </a>
+            </p>
+        </div>
+         <div class="card-body p-4">
+             <form id="AdvancedForm" class="needs-validation">
+                 <div class="row g-4">
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="client" class="form-label">Client</label>
+                         <p>Client 1</p>
+                     </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="user" class="form-label">User</label>
+                         <p>User 1</p>
+                     </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="ulb" class="form-label">ULB</label>
+                        <p>Bikaner Municipal Corporation</p>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="url" class="form-label">Redirect URL</label>
+                        <p>None</p>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="expiresDate" class="form-label">Expires Date</label>
+                         <p>20 Sept 2029</p>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="usedDate" class="form-label">Used Date</label>
+                        <p>None</p>
+                    </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+
+ </section>
+</main>
+{% endblock %}

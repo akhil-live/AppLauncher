@@ -29,7 +29,6 @@
      <div class="card">
          <div class="card-body p-4">
              <div class="section-heading">
-
                  <p>
                     Fields marked with <span class="star-required">*</span> are required.
                  </p>
@@ -98,16 +97,16 @@
                        </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                         <label for="district" class="form-label">District <span class="star-required">*</span></label>
-                         <input type="text" class="form-control" id="district" name="district" placeholder="Enter district" required>
+                        <label for="district" class="form-label">District <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="district" name="district" placeholder="Enter district" required>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                         <label for="city" class="form-label">City <span class="star-required">*</span></label>
-                         <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
+                        <label for="city" class="form-label">City <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                         <label for="legalName" class="form-label">Legal Name <span class="star-required">*</span></label>
-                         <input type="text" class="form-control" id="legalName" name="legalName" placeholder="Enter legal name" required>
+                        <label for="legalName" class="form-label">Legal Name <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="legalName" name="legalName" placeholder="Enter legal name" required>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <label for="email" class="form-label">Email <span class="star-required">*</span></label>
@@ -154,15 +153,15 @@
                             <div class="preview"></div>
                         </div>
                     </div>
-                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                         <label for="validFrom" class="form-label">Valid From <span class="star-required">*</span></label>
-                         <input type="date" class="form-control" id="validFrom" name="validFrom" required>
-                     </div>
-                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                         <label for="validUpto" class="form-label">Valid Upto <span class="star-required">*</span></label>
-                         <input type="date" class="form-control" id="validUpto" name="validUpto" required>
-                     </div>
-                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="validFrom" class="form-label">Valid From <span class="star-required">*</span></label>
+                        <input type="date" class="form-control" id="validFrom" name="validFrom" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="validUpto" class="form-label">Valid Upto <span class="star-required">*</span></label>
+                        <input type="date" class="form-control" id="validUpto" name="validUpto" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <label class="form-label">
                             Status <span class="star-required">*</span>
                         </label><br>
@@ -177,6 +176,7 @@
                             </label>
                         </div>
                     </div>
+                                                 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <div class="textarea-counter-wrapper">
                             <label for="remark" class="form-label">
@@ -201,119 +201,4 @@
 
  </section>
 </main>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    document.querySelectorAll('.searchable-select').forEach(select => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'dropdown';
-
-        select.parentNode.insertBefore(wrapper, select);
-        wrapper.appendChild(select);
-
-        select.classList.add('d-none');
-
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'form-select text-start';
-        button.setAttribute('data-bs-toggle', 'dropdown');
-        button.setAttribute('data-bs-auto-close', 'outside');
-
-        const menu = document.createElement('div');
-        menu.className = 'dropdown-menu w-100 p-2';
-
-        const search = document.createElement('input');
-        search.type = 'search';
-        search.className = 'form-control mb-2';
-        search.placeholder = 'Search...';
-        search.autocomplete = 'off';
-
-        const list = document.createElement('div');
-
-        menu.append(search, list);
-        wrapper.append(button, menu);
-
-
-        // Create dropdown options
-        function showOptions() {
-
-            const searchText = search.value.toLowerCase();
-
-            list.innerHTML = '';
-
-            [...select.options].forEach(option => {
-
-                if (!option.value) return;
-
-                if (!option.text.toLowerCase().includes(searchText))
-                    return;
-
-                const item = document.createElement('button');
-
-                item.type = 'button';
-                item.className = 'dropdown-item d-flex justify-content-between';
-                item.textContent = option.text;
-
-                // Selected option
-                if (option.value === select.value) {
-                    item.classList.add('active');
-                    item.innerHTML += ' ✓';
-                }
-
-                item.onclick = () => {
-
-                    select.value = option.value;
-
-                    [...select.options].forEach(opt => {
-                        opt.removeAttribute('selected');
-                    });
-
-                    option.setAttribute('selected', '');
-
-                    button.textContent = option.text;
-                    button.title = option.text;
-
-                    // Keep normal select/change events working
-                    select.dispatchEvent(new Event('change', {
-                        bubbles: true
-                    }));
-
-                    bootstrap.Dropdown.getOrCreateInstance(button).hide();
-                };
-
-                list.appendChild(item);
-            });
-
-            if (!list.children.length) {
-                list.innerHTML =
-                    '<div class="text-center p-2" style="color: #94a3b8;">No results found</div>';
-            }
-        }
-
-        // Search
-        search.addEventListener('input', showOptions);
-
-
-        // Show options when opened
-        button.addEventListener('shown.bs.dropdown', () => {
-            search.value = '';
-            showOptions();
-            search.focus();
-        });
-
-
-        // Show selected value initially
-        const selected = select.options[select.selectedIndex];
-
-        if (selected && selected.value) {
-            button.textContent = selected.text;
-        } else {
-            button.textContent = select.options[0]?.text || 'Select...';
-        }
-
-    });
-
-
-</script>
 {% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<main class="content">
+    <!-- Breadcrumb -->
+    <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+         <div class="page-heading">
+             <h1 class="page-title">Add SSO Client</h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'dashboard' %}">Dashboard</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'sso-client' %}">SSO Client</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                        Add SSO Client
+                     </li>
+                 </ol>
+             </nav>
+         </div>
+    </section>
+
+    <section class="mb-4">
+     <div class="card">
+         <div class="card-body p-4">
+             <div class="section-heading">
+                 <p>
+                    Fields marked with <span class="star-required">*</span> are required.
+                 </p>
+             </div>
+             <form id="AdvancedForm" class="needs-validation">
+                 <div class="row g-4">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="app" class="form-label">Application <span class="star-required">*</span></label>
+                        <select class="form-select" id="app" name="app[]" multiple data-placeholder="Select applications..."
+                        data-search="true" required>
+                            <option value="udtm">UD Tax Management</option>
+                            <option value="hrms">Human Resource Management</option>
+                            <option value="ims">Inventory Management</option>
+                            <option value="ccms">Cash Collection Management</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="clientId" class="form-label">Client ID <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="clientId" name="clientId" placeholder="Enter client Id" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="clientSecret" class="form-label">Client Secret <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="clientSecret" name="clientSecret" placeholder="Enter client secret" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="audience" class="form-label">Audience</label>
+                        <input type="text" class="form-control" id="audience" name="audience" placeholder="Enter audience">
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="issuer" class="form-label">Issuer <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="issuer" name="issuer" placeholder="Enter issuer" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="url" class="form-label">Allow redirect URL <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="url" name="url" placeholder="Enter allow redirect url" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label class="form-label">
+                            Status <span class="star-required">*</span>
+                        </label><br>
+                        <div class="selectgroup selectgroup-primary selectgroup-pills">
+                            <label class="selectgroup-item mb-2">
+                              <input type="radio" name="status" value="active" class="selectgroup-input" id="status1" required="" checked>
+                              <span class="selectgroup-button ">Active</span>
+                            </label>
+                            <label class="selectgroup-item mb-2">
+                              <input type="radio" name="status" value="inactive" class="selectgroup-input" id="status2" required="">
+                              <span class="selectgroup-button">Inactive</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-print-none">
+                        <p class="text-center pt-2">
+                          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                          <a href="{% url 'sso-client' %}"><button type="button" class="btn btn-secondary btn-sm" name="button">Back</button></a>
+                        </p>
+                    </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+
+ </section>
+</main>
+{% endblock %}

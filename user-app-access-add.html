@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<main class="content">
+    <!-- Breadcrumb -->
+    <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+         <div class="page-heading">
+             <h1 class="page-title">Add User Application Access</h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'dashboard' %}">Dashboard</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'user-app-access' %}">User Application Access</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                        Add User Application Access
+                     </li>
+                 </ol>
+             </nav>
+         </div>
+    </section>
+
+    <section class="mb-4">
+     <div class="card">
+         <div class="card-body p-4">
+             <div class="section-heading">
+                 <p>
+                    Fields marked with <span class="star-required">*</span> are required.
+                 </p>
+             </div>
+             <form id="AdvancedForm" class="needs-validation">
+                 <div class="row g-4">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="user" class="form-label">User <span class="star-required">*</span></label>
+                        <select class="form-select searchable-select" name="user" id="user" required>
+                            <option value="">Select</option>
+                            <option value="1">User 1</option>
+                            <option value="2">User 2</option>
+                            <option value="3">User 3</option>
+                       </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="ulb" class="form-label">ULB <span class="star-required">*</span></label>
+                        <select class="form-select searchable-select" name="ulb" id="ulb" required>
+                            <option value="">Select</option>
+                            <option value="jmc">Bikaner Municipal Corporation</option>
+                            <option value="bmc">Jodhpur Municipal Corporation</option>
+                            <option value="umc">Udaipur Municipal Corporation</option>
+                       </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="app" class="form-label">Application <span class="star-required">*</span></label>
+                        <select class="form-select" id="app" name="app[]" multiple data-placeholder="Select applications..."
+                        data-search="true" required>
+                            <option value="udtm">UD Tax Management</option>
+                            <option value="hrms">Human Resource Management</option>
+                            <option value="ims">Inventory Management</option>
+                            <option value="ccms">Cash Collection Management</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="roleType" class="form-label">Role <span class="star-required">*</span></label>
+                        <select class="form-select" id="roleType" name="roleType" required>
+                            <option value="">Select</option>
+                            <option value="1">Role 1</option>
+                            <option value="2">Role 2</option>
+                            <option value="3">Role 3</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="startDate" class="form-label">Start Date <span class="star-required">*</span></label>
+                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="endDate" class="form-label">End Date <span class="star-required">*</span></label>
+                        <input type="date" class="form-control" id="endDate" name="endDate" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label class="form-label">
+                            Status <span class="star-required">*</span>
+                        </label><br>
+                        <div class="selectgroup selectgroup-primary selectgroup-pills">
+                            <label class="selectgroup-item mb-2">
+                              <input type="radio" name="status" value="active" class="selectgroup-input" id="status1" required="" checked>
+                              <span class="selectgroup-button ">Active</span>
+                            </label>
+                            <label class="selectgroup-item mb-2">
+                              <input type="radio" name="status" value="inactive" class="selectgroup-input" id="status2" required="">
+                              <span class="selectgroup-button">Inactive</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-print-none">
+                        <p class="text-center pt-2">
+                          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                          <a href="{% url 'user-app-access' %}"><button type="button" class="btn btn-secondary btn-sm" name="button">Back</button></a>
+                        </p>
+                    </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+
+ </section>
+</main>
+{% endblock %}
+

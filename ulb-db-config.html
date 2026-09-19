@@ -1,0 +1,420 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<main class="content">
+    <!-- Breadcrumb -->
+     <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+         <div class="page-heading">
+             <h1 class="page-title">ULB Database Configurations</h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'dashboard' %}">Dashboard</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                        ULB Database Configurations
+                     </li>
+                 </ol>
+             </nav>
+         </div>
+     </section>
+     
+     <div class="card border-0 shadow-sm">
+        <div class="card-header d-print-none">
+            <p class="text-end pt-2">
+                <button type="button" class="btn btn-xs btn-primary app-open-btn my-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Print" onclick="printTable('printableArea')">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 2C17.5523 2 18 2.44772 18 3V7H21C21.5523 7 22 7.44772 22 8V18C22 18.5523 21.5523 19 21 19H18V21C18 21.5523 17.5523 22 17 22H7C6.44772 22 6 21.5523 6 21V19H3C2.44772 19 2 18.5523 2 18V8C2 7.44772 2.44772 7 3 7H6V3C6 2.44772 6.44772 2 7 2H17ZM16 17H8V20H16V17ZM20 9H4V17H6V16C6 15.4477 6.44772 15 7 15H17C17.5523 15 18 15.4477 18 16V17H20V9ZM8 10V12H5V10H8ZM16 4H8V7H16V4Z"></path></svg>
+                </button>
+               
+                <button type="button" class="btn btn-xs btn-primary app-open-btn my-1 ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Download">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 10H18L12 16L6 10H11V3H13V10ZM4 19H20V12H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12H4V19Z"></path></svg>
+                </button>
+                
+                <a href="{% url 'ulb-db-config-add' %}">
+                    <button type="button" class="btn btn-xs btn-primary app-open-btn my-1 ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>
+                    </button>
+                </a>
+            </p>
+         </div>
+         <!-- Table Header -->
+         <div class="card-body border-bottom">
+            
+            <div class="row g-3 align-items-center d-print-none">
+                 <!-- Search -->
+                 <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                     <div class="d-flex align-items-center gap-2">
+                         <label for="tableSearch" class="form-label mb-0 fw-medium text-nowrap text-secondary">Search:
+                         </label>
+                         <div class="input-group">
+                             <input type="search" id="tableSearch" class="form-control" placeholder="Search records..."autocomplete="off" style="border-radius: 10px;">
+                             <button type="button" id="clearSearch" class="btn btn-outline-primary d-none" style="border-radius: 50px; margin-left: 2px;">
+                                 Clear
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+     
+                 <!-- Entries -->
+                <div class="col-xl-9 col-md-8 col-sm-6 col-12">
+                     <div class="d-flex align-items-center justify-content-md-end gap-2">
+                         <label for="entriesSelect" class="form-label mb-0 text-nowrap text-secondary" style="font-size: 15px; font-weight: 500;">
+                             Show
+                         </label>
+                         <select id="entriesSelect" class="form-select" style="width: 80px;">
+                             <option value="5">5</option>
+                             <option value="10" selected>10</option>
+                             <option value="25">25</option>
+                             <option value="50">50</option>
+                             <option value="100">100</option>
+                             <option value="-1">All</option>
+                         </select>
+                         <span class="text-secondary text-nowrap">
+                             entries
+                         </span>
+                     </div>
+                </div>
+            </div>
+         </div>
+     
+         <!-- Table -->
+         <div class="table-responsive" id="printableArea">
+             <table id="basic-datatables" class="table table-hover table-bordered align-middle mb-0">
+                 <thead class="table-primary">
+                     <tr>
+                         <th class="text-center">#</th>
+                         <th>ULB Name</th>
+                         <th>Database Name</th>
+                         <th>Database Host</th>
+                         <th>Status</th>
+                         <th>Action</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>Bikaner Municipal Corporation</td>
+                        <td>BMC_DB_01</td>
+                        <td>AWS</td>
+                        <td>
+                            <span class="badge text-bg-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Active">
+                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12ZM12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM17.4571 9.45711L16.0429 8.04289L11 13.0858L8.20711 10.2929L6.79289 11.7071L11 15.9142L17.4571 9.45711Z"></path></svg>
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{% url 'ulb-db-config-view' %}" class="d-print-none">
+                                <button type="button" class="btn btn-xs btn-primary app-open-btn my-1" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3ZM12.0003 19C16.2359 19 19.8603 16.052 20.7777 12C19.8603 7.94803 16.2359 5 12.0003 5C7.7646 5 4.14022 7.94803 3.22278 12C4.14022 16.052 7.7646 19 12.0003 19ZM12.0003 16.5C9.51498 16.5 7.50026 14.4853 7.50026 12C7.50026 9.51472 9.51498 7.5 12.0003 7.5C14.4855 7.5 16.5003 9.51472 16.5003 12C16.5003 14.4853 14.4855 16.5 12.0003 16.5ZM12.0003 14.5C13.381 14.5 14.5003 13.3807 14.5003 12C14.5003 10.6193 13.381 9.5 12.0003 9.5C10.6196 9.5 9.50026 10.6193 9.50026 12C9.50026 13.3807 10.6196 14.5 12.0003 14.5Z"></path></svg>
+                                </button>
+                            </a>
+                            <a href="{% url 'ulb-db-config-add' %}" class="d-print-none">
+                                <button type="button" class="btn btn-xs btn-success app-open-btn my-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.41421 15.89L16.5563 5.74785L15.1421 4.33363L5 14.4758V15.89H6.41421ZM7.24264 17.89H3V13.6473L14.435 2.21231C14.8256 1.82179 15.4587 1.82179 15.8492 2.21231L18.6777 5.04074C19.0682 5.43126 19.0682 6.06443 18.6777 6.45495L7.24264 17.89ZM3 19.89H21V21.89H3V19.89Z"></path></svg>
+                                </button>
+                            </a> 
+                        </td>
+                    </tr>                                  
+                 </tbody>
+             </table>
+         </div>
+         <!-- Footer -->
+         <div class="card-body d-print-none">
+             <div class="row align-items-center g-3">
+                 <!-- Information -->
+                 <div class="col-12 col-md-5">
+                     <div id="tableInfo" class="text-secondary small text-center text-md-start">
+                     </div>
+                 </div>
+                 <!-- Pagination -->
+                 <div class="col-12 col-md-7">
+                     <nav aria-label="Table pagination" class="d-flex justify-content-center justify-content-md-end">
+                         <ul id="pagination" class="pagination pagination-sm mb-0"></ul>
+                     </nav>
+                 </div>
+             </div>
+         </div>
+     
+     </div>
+ </main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const table = document.getElementById("basic-datatables");
+        const tbody = table.querySelector("tbody");
+
+        const searchInput = document.getElementById("tableSearch");
+        const clearSearch = document.getElementById("clearSearch");
+        const entriesSelect = document.getElementById("entriesSelect");
+
+        const tableInfo = document.getElementById("tableInfo");
+        const pagination = document.getElementById("pagination");
+
+        const allRows = Array.from(tbody.querySelectorAll("tr"));
+
+        let filteredRows = [...allRows];
+        let currentPage = 1;
+        let rowsPerPage = Number(entriesSelect.value);
+
+        // ============ SEARCH ===============
+        searchInput.addEventListener("input", () => {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            currentPage = 1;
+            clearSearch.classList.toggle(
+                "d-none",
+                searchTerm === ""
+            );
+            filteredRows = allRows.filter(row =>
+                row.textContent
+                    .toLowerCase()
+                    .includes(searchTerm)
+            );
+            render();
+        });
+
+        // ========== CLEAR SEARCH =================
+        clearSearch.addEventListener("click", () => {
+            searchInput.value = "";
+            clearSearch.classList.add("d-none");
+            filteredRows = [...allRows];
+            currentPage = 1;
+            render();
+            searchInput.focus();
+        });
+        // ========== ENTRIES =======================
+        entriesSelect.addEventListener("change", () => {
+
+            rowsPerPage =
+                Number(entriesSelect.value);
+
+            currentPage = 1;
+
+            render();
+
+        });
+
+        // ========== RENDER ====================
+        function render() {
+            // Hide every row
+            allRows.forEach(row => {
+                row.classList.add("d-none");
+            });
+            // No results
+            if (filteredRows.length === 0) {
+                showNoResults();
+                tableInfo.textContent = "Showing 0 to 0 of 0 entries";
+                pagination.innerHTML = "";
+                return;
+            }
+            removeNoResults();
+            const totalEntries = filteredRows.length;
+
+            // All
+            if (rowsPerPage === -1) {
+                filteredRows.forEach(row => {
+                    row.classList.remove("d-none");
+                });
+                tableInfo.textContent = `Showing 1 to ${totalEntries} of ${totalEntries} entries`;
+                pagination.innerHTML = "";
+                return;
+            }
+            const totalPages =
+                Math.ceil(totalEntries / rowsPerPage);
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+            const start =
+                (currentPage - 1) * rowsPerPage;
+            const end = Math.min(start + rowsPerPage,totalEntries);
+
+            // Show current page
+            filteredRows
+                .slice(start, end)
+                .forEach(row => {
+                    row.classList.remove("d-none");
+                });
+
+            // Information
+            tableInfo.textContent =
+                `Showing ${start + 1} to ${end} of ${totalEntries} entries`;
+
+            renderPagination(totalPages);
+
+        }
+
+        // ========= PAGINATION =====================
+        function renderPagination(totalPages) {
+            pagination.innerHTML = "";
+            if (totalPages <= 1) {
+                return;
+            }
+            // Previous
+            pagination.appendChild(
+                createPageItem(
+                    "<",
+                    currentPage > 1,
+                    () => {
+                        currentPage--;
+                        render();
+                    }
+                )
+            );
+            // Page numbers
+            const pages =
+                getPageNumbers(currentPage,totalPages);
+
+            pages.forEach(page => {
+                if (page === "...") {
+                    const li =
+                        document.createElement("li");
+                    li.className =
+                        "page-item disabled";
+                    li.innerHTML = `
+                        <span class="page-link">
+                            ...
+                        </span>
+                    `;
+                    pagination.appendChild(li);
+                    return;
+                }
+                pagination.appendChild(
+                    createPageItem(
+                        page,
+                        true,
+                        () => {
+                            currentPage = page;
+                            render();
+                        },
+                        page === currentPage
+                    )
+                );
+
+            });
+
+            // Next
+            pagination.appendChild(
+                createPageItem(
+                    ">",
+                    currentPage < totalPages,
+                    () => {
+                        currentPage++;
+                        render();
+                    }
+                )
+            );
+
+        }
+
+        // =========CREATE PAGINATION ITEM ============
+        function createPageItem(
+            text,
+            enabled,
+            callback,
+            active = false
+        ) {
+
+            const li =
+                document.createElement("li");
+            li.className = "page-item";
+            if (!enabled) { li.classList.add("disabled");}
+
+            if (active) {li.classList.add("active");}
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "page-link";
+            button.textContent = text;
+            button.disabled = !enabled;
+            if (enabled) {
+                button.addEventListener(
+                    "click",
+                    callback
+                );
+            }
+            li.appendChild(button);
+            return li;
+        }
+        // ======== PAGE NUMBERS ====================
+
+        function getPageNumbers(current, total) {
+            if (total <= 6) {
+                return Array.from(
+                    { length: total },
+                    (_, i) => i + 1
+                );
+            }
+            if (current <= 3) {
+                return [
+                    1,
+                    2,
+                    3,
+                    4,
+                    "...",
+                    total
+                ];
+            }
+            if (current >= total - 2) {
+                return [
+                    1,
+                    "...",
+                    total - 3,
+                    total - 2,
+                    total - 1,
+                    total
+                ];
+
+            }
+            return [
+                1,
+                "...",
+                current - 1,
+                current,
+                current + 1,
+                "...",
+                total
+            ];
+
+        }
+
+
+        // ========= NO RESULTS =====================
+        function showNoResults() {
+            removeNoResults();
+            const row = document.createElement("tr");
+            row.id = "noResultsRow";
+            const cell = document.createElement("td");
+            cell.colSpan = table.querySelectorAll("thead th").length;
+            cell.className = "text-start text-secondary py-3";
+
+            cell.innerHTML = `
+            <div class="fw-semibold mb-1 ms-2">
+                    No records found <small>
+                    ( Try changing your search. )
+                </small>
+                </div>
+            `;
+
+            row.appendChild(cell);
+            tbody.appendChild(row);
+        }
+
+        // ======= REMOVE NO RESULTS ====================
+        function removeNoResults() {
+            const row = document.getElementById("noResultsRow");
+            if (row) {
+                row.remove();
+            }
+        }
+
+        // ======== INITIALIZE ===========================
+        render();
+        });
+
+
+    </script>
+{% endblock %}
+

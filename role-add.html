@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<main class="content">
+    <!-- Breadcrumb -->
+    <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+         <div class="page-heading">
+             <h1 class="page-title">Add Role</h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'dashboard' %}">Dashboard</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'role' %}">Role</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                        Add Role
+                     </li>
+                 </ol>
+             </nav>
+         </div>
+    </section>
+
+    <section class="mb-4">
+     <div class="card">
+         <div class="card-body p-4">
+             <div class="section-heading">
+                 <p>
+                    Fields marked with <span class="star-required">*</span> are required.
+                 </p>
+             </div>
+             <form id="AdvancedForm" class="needs-validation">
+                 <div class="row g-4">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="roleName" class="form-label">Role Name <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="roleName" name="roleName" placeholder="Enter role name" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="roleCode" class="form-label">Role Code <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="roleCode" name="roleCode" placeholder="Enter role code" required>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="textarea-counter-wrapper">
+                            <label for="description" class="form-label">
+                                Description <span class="star-required">*</span>
+                            </label>
+                            <textarea class="form-control" id="description" maxlength="500" placeholder="Type description here..."></textarea>
+                            <div class="form-text text-end">
+                                <span class="textarea-count">0</span>/<span class="textarea-max">500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="roleType" class="form-label">Role Type <span class="star-required">*</span></label>
+                        <select class="form-select" id="roleType" name="roleType" required>
+                            <option value="">Select</option>
+                            <option value="1">Role 1</option>
+                            <option value="2">Role 2</option>
+                            <option value="3">Role 3</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="app" class="form-label">Application <span class="star-required">*</span></label>
+                        <select class="form-select" id="app" name="app[]" multiple data-placeholder="Select applications..."
+                        data-search="true" required>
+                            <option value="udtm">UD Tax Management</option>
+                            <option value="hrms">Human Resource Management</option>
+                            <option value="ims">Inventory Management</option>
+                            <option value="ccms">Cash Collection Management</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="ulb" class="form-label">ULB <span class="star-required">*</span></label>
+                        <select class="form-select" id="ulb" name="ulb[]" multiple data-placeholder="Select ulb"
+                        data-search="true" required>
+                            <option value="jmc">Bikaner Municipal Corporation</option>
+                            <option value="bmc">Jodhpur Municipal Corporation</option>
+                            <option value="umc">Udaipur Municipal Corporation</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label class="form-label">
+                            Status <span class="star-required">*</span>
+                        </label><br>
+                        <div class="selectgroup selectgroup-primary selectgroup-pills">
+                            <label class="selectgroup-item mb-2">
+                              <input type="radio" name="status" value="active" class="selectgroup-input" id="status1" required="" checked>
+                              <span class="selectgroup-button ">Active</span>
+                            </label>
+                            <label class="selectgroup-item mb-2">
+                              <input type="radio" name="status" value="inactive" class="selectgroup-input" id="status2" required="">
+                              <span class="selectgroup-button">Inactive</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-print-none">
+                        <p class="text-center pt-2">
+                          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                          <a href="{% url 'role' %}"><button type="button" class="btn btn-secondary btn-sm" name="button">Back</button></a>
+                        </p>
+                    </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+
+ </section>
+</main>
+{% endblock %}
+

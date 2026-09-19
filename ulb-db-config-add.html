@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<main class="content">
+    <!-- Breadcrumb -->
+    <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+         <div class="page-heading">
+             <h1 class="page-title">Add ULB Database Configuration</h1>
+             <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'dashboard' %}">Dashboard</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                         <a href="{% url 'ulb-db-config' %}">ULB Database Configurations</a>
+                     </li>
+                     <li class="breadcrumb-item">
+                        Add ULB Database Configuration
+                     </li>
+                 </ol>
+             </nav>
+         </div>
+    </section>
+
+    <section class="mb-4">
+     <div class="card">
+         <div class="card-body p-4">
+             <div class="section-heading">
+                 <p>
+                    Fields marked with <span class="star-required">*</span> are required.
+                 </p>
+             </div>
+             <form id="AdvancedForm" class="needs-validation">
+                 <div class="row g-4">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="ulb" class="form-label">ULB <span class="star-required">*</span></label>
+                        <select class="form-select searchable-select" name="ulb" id="ulb" required>
+                            <option value="">Select ULB</option>
+                            <option value="jmc">Bikaner Municipal Corporation</option>
+                            <option value="bmc">Jodhpur Municipal Corporation</option>
+                            <option value="umc">Udaipur Municipal Corporation</option>
+                       </select>
+                    </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="dbAlias" class="form-label">Database Alias <span class="star-required">*</span></label>
+                         <input type="text" class="form-control" id="dbAlias" name="dbAlias" placeholder="Enter database alias" required>
+                     </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="dbHost" class="form-label">Database Name <span class="star-required">*</span></label>
+                         <input type="text" class="form-control" id="dbName" name="dbName" placeholder="Enter database name" required>
+                     </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="dbHost" class="form-label">Database Host <span class="star-required">*</span></label>
+                         <input type="text" class="form-control" id="dbHost" name="dbHost" placeholder="Enter database host" required>
+                     </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="dbPort" class="form-label">Database Port <span class="star-required">*</span></label>
+                         <input type="number" class="form-control" id="dbPort" name="dbPort" placeholder="Enter database port" required>
+                     </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="dbUsername" class="form-label">Database Username <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="dbUsername" name="dbUsername" placeholder="Enter database username" required>
+                    </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <label for="dbSecretRef" class="form-label">Database Secret Reference <span class="star-required">*</span></label>
+                        <input type="text" class="form-control" id="dbSecretRef" name="dbSecretRef" placeholder="Enter database secret reference" required>
+                    </div>
+                    <div class="d-print-none">
+                        <p class="text-center pt-2">
+                          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                          <a href="{% url 'ulb-db-config' %}"><button type="button" class="btn btn-secondary btn-sm" name="button">Back</button></a>
+                        </p>
+                    </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+
+ </section>
+</main>
+{% endblock %}
+
