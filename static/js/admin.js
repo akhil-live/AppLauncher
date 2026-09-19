@@ -496,6 +496,120 @@ function initMultiDropdown() {
 }
 
 /*=======================================================
+    SEARCHABLE DROPDOWN
+========================================================== */
+$(document).ready(function () {
+    document.querySelectorAll('.searchable-select').forEach(select => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'dropdown';
+    
+        select.parentNode.insertBefore(wrapper, select);
+        wrapper.appendChild(select);
+    
+        select.classList.add('d-none');
+    
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'form-select text-start';
+        button.setAttribute('data-bs-toggle', 'dropdown');
+        button.setAttribute('data-bs-auto-close', 'outside');
+    
+        const menu = document.createElement('div');
+        menu.className = 'dropdown-menu w-100 p-2';
+    
+        const search = document.createElement('input');
+        search.type = 'search';
+        search.className = 'form-control mb-2';
+        search.placeholder = 'Search...';
+        search.autocomplete = 'off';
+    
+        const list = document.createElement('div');
+    
+        menu.append(search, list);
+        wrapper.append(button, menu);
+    
+    
+        // Create dropdown options
+        function showOptions() {
+    
+            const searchText = search.value.toLowerCase();
+    
+            list.innerHTML = '';
+    
+            [...select.options].forEach(option => {
+    
+                if (!option.value) return;
+    
+                if (!option.text.toLowerCase().includes(searchText))
+                    return;
+    
+                const item = document.createElement('button');
+    
+                item.type = 'button';
+                item.className = 'dropdown-item d-flex justify-content-between';
+                item.textContent = option.text;
+    
+                // Selected option
+                if (option.value === select.value) {
+                    item.classList.add('active');
+                    item.innerHTML += ' ✓';
+                }
+    
+                item.onclick = () => {
+    
+                    select.value = option.value;
+    
+                    [...select.options].forEach(opt => {
+                        opt.removeAttribute('selected');
+                    });
+    
+                    option.setAttribute('selected', '');
+    
+                    button.textContent = option.text;
+                    button.title = option.text;
+    
+                    // Keep normal select/change events working
+                    select.dispatchEvent(new Event('change', {
+                        bubbles: true
+                    }));
+    
+                    bootstrap.Dropdown.getOrCreateInstance(button).hide();
+                };
+    
+                list.appendChild(item);
+            });
+    
+            if (!list.children.length) {
+                list.innerHTML =
+                    '<div class="text-center p-2" style="color: #94a3b8;">No results found</div>';
+            }
+        }
+    
+        // Search
+        search.addEventListener('input', showOptions);
+    
+    
+        // Show options when opened
+        button.addEventListener('shown.bs.dropdown', () => {
+            search.value = '';
+            showOptions();
+            search.focus();
+        });
+    
+    
+        // Show selected value initially
+        const selected = select.options[select.selectedIndex];
+    
+        if (selected && selected.value) {
+            button.textContent = selected.text;
+        } else {
+            button.textContent = select.options[0]?.text || 'Select...';
+        }
+    
+    });
+});
+
+/*=======================================================
     Open calendar
 ========================================================== */
 document.querySelectorAll('input[type="date"]').forEach(input => {
