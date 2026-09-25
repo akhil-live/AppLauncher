@@ -1675,6 +1675,37 @@ background-color: var(--border) !important;
 .choices__list--dropdown .choices__item, .choices__list[aria-expanded] .choices__item {
     font-size: 13px;
 }
+
+.password-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 0;
+    z-index: 4;
+    transition: color 0.2s ease;
+}
+.password-toggle:hover {
+    color: var(--blue);
+}
+.password-toggle svg {
+    width: 19px;
+    height: 19px;
+}
+.input-group-custom {
+    margin-bottom: 20px;
+}
+
 /* =========================================================
 ADVANCED FILE UPLOAD
 ========================================================= */
